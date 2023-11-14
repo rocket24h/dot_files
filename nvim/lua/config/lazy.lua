@@ -11,33 +11,7 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules hereby
-    -- { "sainnhe/everforest" },
-    { "mcchrish/zenbones.nvim" },
-    -- { "nyoom-engineering/oxocarbon.nvim" },
-    { "rktjmp/lush.nvim" },
-    -- { "EdenEast/nightfox.nvim" },
-    {
-      "nvim-tree/nvim-tree.lua",
-      dependencies = {
-        "nvim-tree/nvim-web-devicons",
-      },
-    },
-    -- { "rebelot/kanagawa.nvim" },
-    {
-      "craftzdog/solarized-osaka.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
-    },
-    {
-      "AlexvZyl/nordic.nvim",
-      lazy = false,
-      priority = 1000,
-      config = function()
-        require("nordic").load()
-      end,
-    },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.python" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
