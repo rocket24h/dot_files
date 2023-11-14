@@ -9,6 +9,14 @@ local lsp_servers = {
 }
 local plugins = {
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "mypy",
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mason.nvim",

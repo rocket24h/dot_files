@@ -52,6 +52,7 @@ colors = [
     "#888F94",
 ]
 
+# Keybinds
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
