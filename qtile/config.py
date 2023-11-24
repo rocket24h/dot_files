@@ -28,30 +28,13 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-
+import colors as cs
 mod = "mod4"
+alt = "mod1"
 terminal = guess_terminal()
 
 # Zenbones color scheme
-colors = [
-    "#1C1917",
-    "#DE6E7C",
-    "#819B69",
-    "#B77E64",
-    "#6099C0",
-    "#B279A7",
-    "#66A5AD",
-    "#B4BDC3",
-    "#403833",
-    "#E8838F",
-    "#8BAE68",
-    "#D68C67",
-    "#61ABDA",
-    "#CF86C1",
-    "#65B8C1",
-    "#888F94",
-]
-
+colors = cs.colorschemes().zenbones()
 # Keybinds
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -61,7 +44,8 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([alt], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
@@ -142,8 +126,10 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
+    layout.Columns(margin = 5, border_normal=colors["main_bg"], border_focus=colors["main_fg"], border_width=2),
+    layout.Max(
+        
+    ),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -179,10 +165,14 @@ screens = [
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
                     },
-                    name_transform=lambda name: name.upper(),
+                    name_transform=lambda name: name.usper(),
                 ),
                 # widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                widget.Battery(
+                    background = colors["main_green"],
+                    format = '{percentage:2%}',
+                ),
+
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
@@ -190,15 +180,9 @@ screens = [
                 widget.QuickExit(),
             ],
             36,
-            background=colors[0],
-            border_width=[2, 2, 2, 2],  # Draw top and bottom borders
-            border_color=[
-                colors[2],
-                colors[2],
-                colors[2],
-                colors[2],
-            ],  # Borders are magenta
-            margin=[15, 20, 15, 20],
+            background=colors["main_bg"],
+            #border_width=[3, 3, 3, 3],  # Draw top and bottom borders
+            margin=[0, 0, 0, 0],
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -206,6 +190,8 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
 ]
+
+
 
 # Drag floating layouts.
 mouse = [
